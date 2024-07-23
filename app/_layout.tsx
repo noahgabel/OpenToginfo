@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import Text from "../components/Text";
 
 export default function Layout() {
   return (
@@ -9,7 +10,14 @@ export default function Layout() {
     >
       <Stack.Screen
         name="index"
-        options={{ headerStyle: { backgroundColor: "#040404" } }}
+        options={{
+          headerStyle: { backgroundColor: "#040404" },
+          headerTitle: () => (
+            <Text fontSize={20} weight={500}>
+              Ringsted
+            </Text>
+          ),
+        }}
       />
     </Stack>
   );
