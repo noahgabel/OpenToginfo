@@ -3,7 +3,11 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={({ theme }) => ({
+        tabBarStyle: { backgroundColor: theme.colors.card },
+      })}
+    >
       <Tabs.Screen
         name="index"
         options={{

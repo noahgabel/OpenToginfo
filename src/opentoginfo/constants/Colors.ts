@@ -1,6 +1,3 @@
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
   light: {
     primary: 'rgb(120, 69, 172)',
@@ -45,9 +42,9 @@ export const Colors = {
     backdrop: 'rgba(51, 47, 55, 0.4)',
   },
   dark: {
-    primary: 'rgb(220, 184, 255)',
-    onPrimary: 'rgb(71, 12, 122)',
-    primaryContainer: 'rgb(95, 43, 146)',
+    primary: 'rgb(0, 89, 207)',
+    onPrimary: 'rgb(0, 89, 207)',
+    primaryContainer: 'rgb(13, 13, 13)',
     onPrimaryContainer: 'rgb(240, 219, 255)',
     secondary: 'rgb(208, 193, 218)',
     onSecondary: 'rgb(54, 44, 63)',
@@ -61,7 +58,7 @@ export const Colors = {
     onError: 'rgb(105, 0, 5)',
     errorContainer: 'rgb(147, 0, 10)',
     onErrorContainer: 'rgb(255, 180, 171)',
-    background: 'rgb(29, 27, 30)',
+    background: 'rgb(0, 0, 0)',
     onBackground: 'rgb(231, 225, 229)',
     surface: 'rgb(29, 27, 30)',
     onSurface: 'rgb(231, 225, 229)',
@@ -85,5 +82,6 @@ export const Colors = {
     surfaceDisabled: 'rgba(231, 225, 229, 0.12)',
     onSurfaceDisabled: 'rgba(231, 225, 229, 0.38)',
     backdrop: 'rgba(51, 47, 55, 0.4)',
+    card: 'rgb(31, 31, 31)',
   },
 };
