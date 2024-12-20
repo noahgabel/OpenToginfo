@@ -1,13 +1,16 @@
 import { View, StyleSheet } from 'react-native';
-import { Card, Text, TouchableRipple, useTheme } from 'react-native-paper';
+import { Card, TouchableRipple, useTheme, Text } from 'react-native-paper';
 
 export default function Index() {
   const theme = useTheme();
   return (
     <View>
-      <Text variant="displayLarge">Display Large - Space Grotesk</Text>
-      <Text variant="bodyMedium">Body Medium - Space Grotesk</Text>
-      <Text style={{ fontFamily: 'SpaceGrotesk-Bold', fontSize: 20 }}>
+      <Text
+        style={{
+          color: 'white',
+          fontFamily: 'SpaceGrotesk_500Medium',
+        }}
+      >
         Custom Style - Space Grotesk g
       </Text>
       <Card style={[styles.card, { backgroundColor: theme.colors.backdrop }]}>

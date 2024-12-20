@@ -6,6 +6,8 @@ export default function TabLayout() {
     <Tabs
       screenOptions={({ theme }) => ({
         tabBarStyle: { backgroundColor: theme.colors.card },
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarIconStyle: { margin: 0, padding: 0 },
       })}
     >
       <Tabs.Screen

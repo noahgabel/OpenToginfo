@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import {
   configureFonts,
@@ -13,59 +13,54 @@ import {
 } from '@react-navigation/native';
 import { adaptNavigationTheme } from 'react-native-paper';
 import merge from 'deepmerge';
-
 import { Colors } from '../constants/Colors';
+import {
+  SpaceGrotesk_300Light,
+  SpaceGrotesk_400Regular,
+  SpaceGrotesk_500Medium,
+  SpaceGrotesk_600SemiBold,
+  SpaceGrotesk_700Bold,
+  useFonts,
+} from '@expo-google-fonts/space-grotesk';
+import React from 'react';
 
 const fontConfig = {
-  regular: { fontFamily: 'SpaceGrotesk-Regular', fontWeight: '400' as const },
-  medium: { fontFamily: 'SpaceGrotesk-Medium', fontWeight: '500' as const },
-  bold: { fontFamily: 'SpaceGrotesk-Bold', fontWeight: '700' as const },
-  heavy: { fontFamily: 'SpaceGrotesk-Bold', fontWeight: '800' as const },
-  displayLarge: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
-    fontSize: 57,
-    lineHeight: 64,
-    letterSpacing: 0,
-  },
-  displayMedium: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
-    fontSize: 45,
-    lineHeight: 52,
-    letterSpacing: 0,
-  },
-  displaySmall: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
-    fontSize: 36,
-    lineHeight: 44,
-    letterSpacing: 0,
-  },
-  bodyLarge: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
-    fontSize: 16,
-    lineHeight: 24,
-    letterSpacing: 0.15,
-  },
-  bodyMedium: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
+  default: {
+    fontFamily: 'SpaceGrotesk_400Regular',
+    fontWeight: 'normal',
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: 20, // Increased for better spacing
     letterSpacing: 0.25,
   },
-  bodySmall: {
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: '400' as const,
-    fontSize: 12,
-    lineHeight: 16,
+  medium: {
+    fontFamily: 'SpaceGrotesk_500Medium',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0.5,
+  },
+  light: {
+    fontFamily: 'SpaceGrotesk_300Light',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 20,
     letterSpacing: 0.4,
   },
-};
-
-const customFontConfig = configureFonts({ config: fontConfig });
+  semibold: {
+    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0.6,
+  },
+  bold: {
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0.7,
+  },
+} as const;
 
 const customDarkTheme = {
   ...MD3DarkTheme,
@@ -73,9 +68,7 @@ const customDarkTheme = {
     ...MD3DarkTheme.colors,
     ...Colors.dark,
   },
-  fonts: {
-    ...customFontConfig,
-  },
+  fonts: configureFonts({ config: fontConfig }),
 };
 
 const customLightTheme = {
@@ -84,9 +77,7 @@ const customLightTheme = {
     ...MD3LightTheme.colors,
     ...Colors.light,
   },
-  fonts: {
-    ...customFontConfig,
-  },
+  fonts: configureFonts({ config: fontConfig }),
 };
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -99,7 +90,7 @@ const CombinedDefaultTheme = merge(LightTheme, {
     ...LightTheme.colors,
     ...customLightTheme.colors,
   },
-  fonts: fontConfig,
+  fonts: configureFonts({ config: fontConfig }),
 });
 
 const CombinedDarkTheme = merge(DarkTheme, {
@@ -107,10 +98,26 @@ const CombinedDarkTheme = merge(DarkTheme, {
     ...DarkTheme.colors,
     ...customDarkTheme.colors,
   },
-  fonts: fontConfig,
+  fonts: configureFonts({ config: fontConfig }),
 });
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
+  const [loaded, error] = useFonts({
+    SpaceGrotesk_300Light,
+    SpaceGrotesk_400Regular,
+    SpaceGrotesk_500Medium,
+    SpaceGrotesk_600SemiBold,
+    SpaceGrotesk_700Bold,
+  });
+
+  React.useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
   const colorScheme = useColorScheme();
 
   const paperTheme =
@@ -119,9 +126,13 @@ export default function RootLayout() {
   const navigationTheme =
     colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme;
 
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <PaperProvider theme={paperTheme}>
-      <ThemeProvider value={navigationTheme}>
+      <ThemeProvider value={navigationTheme as any}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
