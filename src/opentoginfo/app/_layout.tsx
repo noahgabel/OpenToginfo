@@ -15,46 +15,59 @@ import { adaptNavigationTheme } from 'react-native-paper';
 import merge from 'deepmerge';
 import { Colors } from '../constants/Colors';
 import {
-  SpaceGrotesk_300Light,
-  SpaceGrotesk_400Regular,
-  SpaceGrotesk_500Medium,
-  SpaceGrotesk_600SemiBold,
-  SpaceGrotesk_700Bold,
   useFonts,
-} from '@expo-google-fonts/space-grotesk';
+  FiraSans_100Thin,
+  FiraSans_100Thin_Italic,
+  FiraSans_200ExtraLight,
+  FiraSans_200ExtraLight_Italic,
+  FiraSans_300Light,
+  FiraSans_300Light_Italic,
+  FiraSans_400Regular,
+  FiraSans_400Regular_Italic,
+  FiraSans_500Medium,
+  FiraSans_500Medium_Italic,
+  FiraSans_600SemiBold,
+  FiraSans_600SemiBold_Italic,
+  FiraSans_700Bold,
+  FiraSans_700Bold_Italic,
+  FiraSans_800ExtraBold,
+  FiraSans_800ExtraBold_Italic,
+  FiraSans_900Black,
+  FiraSans_900Black_Italic,
+} from '@expo-google-fonts/fira-sans';
 import React from 'react';
 
 const fontConfig = {
   default: {
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: 'FiraSans_400Regular',
     fontWeight: 'normal',
     fontSize: 14,
-    lineHeight: 20, // Increased for better spacing
+    lineHeight: 20,
     letterSpacing: 0.25,
   },
   medium: {
-    fontFamily: 'SpaceGrotesk_500Medium',
+    fontFamily: 'FiraSans_500Medium',
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.5,
   },
   light: {
-    fontFamily: 'SpaceGrotesk_300Light',
+    fontFamily: 'FiraSans_300Light',
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.4,
   },
   semibold: {
-    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontFamily: 'FiraSans_600SemiBold',
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.6,
   },
   bold: {
-    fontFamily: 'SpaceGrotesk_700Bold',
+    fontFamily: 'FiraSans_700Bold',
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 20,
@@ -105,11 +118,24 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceGrotesk_300Light,
-    SpaceGrotesk_400Regular,
-    SpaceGrotesk_500Medium,
-    SpaceGrotesk_600SemiBold,
-    SpaceGrotesk_700Bold,
+    FiraSans_100Thin,
+    FiraSans_100Thin_Italic,
+    FiraSans_200ExtraLight,
+    FiraSans_200ExtraLight_Italic,
+    FiraSans_300Light,
+    FiraSans_300Light_Italic,
+    FiraSans_400Regular,
+    FiraSans_400Regular_Italic,
+    FiraSans_500Medium,
+    FiraSans_500Medium_Italic,
+    FiraSans_600SemiBold,
+    FiraSans_600SemiBold_Italic,
+    FiraSans_700Bold,
+    FiraSans_700Bold_Italic,
+    FiraSans_800ExtraBold,
+    FiraSans_800ExtraBold_Italic,
+    FiraSans_900Black,
+    FiraSans_900Black_Italic,
   });
 
   React.useEffect(() => {

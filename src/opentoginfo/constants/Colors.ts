@@ -1,7 +1,7 @@
 export const Colors = {
   light: {
-    primary: 'rgb(120, 69, 172)',
-    onPrimary: 'rgb(255, 255, 255)',
+    primary: 'rgb(0, 89, 207)',
+    onPrimary: 'rgb(0, 89, 207)',
     primaryContainer: 'rgb(240, 219, 255)',
     onPrimaryContainer: 'rgb(44, 0, 81)',
     secondary: 'rgb(102, 90, 111)',
@@ -82,6 +82,6 @@ export const Colors = {
     surfaceDisabled: 'rgba(231, 225, 229, 0.12)',
     onSurfaceDisabled: 'rgba(231, 225, 229, 0.38)',
     backdrop: 'rgba(51, 47, 55, 0.4)',
-    card: 'rgb(31, 31, 31)',
+    card: 'rgb(30, 30, 30)',
   },
 };

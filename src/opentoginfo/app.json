@@ -34,15 +34,7 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-font",
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "node_modules/@expo-google-fonts/space-grotesk/SpaceGrotesk_500Medium.ttf"
-          ]
-        }
-      ]
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
