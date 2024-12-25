@@ -1,73 +1,45 @@
 import DeparturesView from '@/components/departures-view.component';
-import { StyleSheet } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { MitTogDeparturesModel } from '@/models/mit-tog-departures.model';
+import { useEffect, useState } from 'react';
 
 export default function DepartureBoard() {
-  const theme = useTheme();
-  return (
-    <DeparturesView />
-    /*     <View>
-      <Card
-        style={[
-          styles.card,
-          { backgroundColor: theme.colors.secondaryContainer },
-        ]}
-      >
-        <TouchableRipple
-          onPress={() => console.log('Ripple effect clicked')}
-          borderless
-        >
-          <View style={styles.content}>
-            <Text style={styles.time}>12:34</Text>
-            <Text style={styles.destination}>Copenhagen</Text>
-            <Text style={styles.track}>5</Text>
-            <Text style={styles.train}>IC 1234</Text>
-          </View>
-        </TouchableRipple>
-      </Card>
-    </View> */
-  );
-}
+  const [departures, setDepartures] = useState<MitTogDeparturesModel>();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    padding: 8,
-  },
-  card: {
-    borderRadius: 0,
-    marginVertical: 4,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-  },
-  time: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  destination: {
-    fontSize: 16,
-    flex: 2,
-    marginLeft: 8,
-  },
-  track: {
-    fontSize: 16,
-    flex: 1,
-    textAlign: 'right',
-  },
-  train: {
-    fontSize: 16,
-    flex: 1,
-    textAlign: 'right',
-  },
-});
+  useEffect(() => {
+    const ws = new WebSocket(
+      'wss://api.mittog.dk/api/ws/departure/KH/dinstation/',
+    );
+
+    ws.onopen = () => {
+      console.log('WebSocket connection opened');
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data) as MitTogDeparturesModel;
+        const newDepartures = data;
+        setDepartures(newDepartures);
+        console.log(
+          'Received new departures:',
+          departures?.data.Trains[0].EstimatedTimeDeparture,
+        );
+      } catch (error) {
+        console.error('Error parsing WebSocket message:', error);
+      }
+    };
+
+    ws.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
+
+  return <DeparturesView />;
+}

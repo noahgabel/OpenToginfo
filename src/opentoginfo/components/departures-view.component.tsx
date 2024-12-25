@@ -16,11 +16,11 @@ const mockData = [
     id: '2',
     time: '13:00',
     newTime: '13:01',
-    to: 'Aarhus',
+    to: 'Aarhus,',
     toExtra: 'Fredericia',
     track: '2',
     train: 'RE 5678',
-    details: 'GoCollective',
+    details: 'Gokke kollektivet',
   },
   {
     id: '3',
@@ -55,7 +55,7 @@ export default function DeparturesView() {
             {item.time} {item.newTime}
           </Text>
           <Text style={[styles.column, styles.destination]}>
-            {item.to}, {item.toExtra}
+            {item.to} {item.toExtra}
           </Text>
           <Text style={styles.column}>{item.track}</Text>
           <Text style={styles.column}>{item.train}</Text>
