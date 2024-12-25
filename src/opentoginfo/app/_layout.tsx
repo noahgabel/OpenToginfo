@@ -1,5 +1,5 @@
 import { SplashScreen, Stack } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { StatusBar, useColorScheme, View } from 'react-native';
 import {
   configureFonts,
   MD3DarkTheme,
@@ -36,6 +36,7 @@ import {
   FiraSans_900Black_Italic,
 } from '@expo-google-fonts/fira-sans';
 import React from 'react';
+import DepartureBoard from './departureboard';
 
 const fontConfig = {
   default: {
@@ -159,9 +160,17 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme as any}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
+        <StatusBar backgroundColor={navigationTheme.colors.background} />
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: navigationTheme.colors.background,
+          }}
+        >
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          </Stack>
+        </View>
       </ThemeProvider>
     </PaperProvider>
   );

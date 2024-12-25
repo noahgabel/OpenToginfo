@@ -5,14 +5,6 @@ export default function DepartureBoard() {
   const theme = useTheme();
   return (
     <View>
-      <Text
-        style={{
-          color: 'white',
-          fontSize: 24,
-        }}
-      >
-        Custom Style - Space Grotesk g
-      </Text>
       <Card style={[styles.card, { backgroundColor: theme.colors.backdrop }]}>
         <TouchableRipple
           onPress={() => console.log('Ripple effect clicked')}

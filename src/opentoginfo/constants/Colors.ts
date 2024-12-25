@@ -1,7 +1,7 @@
 export const Colors = {
   light: {
     primary: 'rgb(0, 89, 207)',
-    onPrimary: 'rgb(0, 89, 207)',
+    onPrimary: 'rgb(0, 0, 0)',
     primaryContainer: 'rgb(240, 219, 255)',
     onPrimaryContainer: 'rgb(44, 0, 81)',
     secondary: 'rgb(102, 90, 111)',
@@ -43,7 +43,7 @@ export const Colors = {
   },
   dark: {
     primary: 'rgb(0, 89, 207)',
-    onPrimary: 'rgb(0, 89, 207)',
+    onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(13, 13, 13)',
     onPrimaryContainer: 'rgb(240, 219, 255)',
     secondary: 'rgb(208, 193, 218)',
@@ -58,7 +58,7 @@ export const Colors = {
     onError: 'rgb(105, 0, 5)',
     errorContainer: 'rgb(147, 0, 10)',
     onErrorContainer: 'rgb(255, 180, 171)',
-    background: 'rgb(0, 0, 0)',
+    background: 'rgb(14, 14, 14)',
     onBackground: 'rgb(231, 225, 229)',
     surface: 'rgb(29, 27, 30)',
     onSurface: 'rgb(231, 225, 229)',
