@@ -36,7 +36,6 @@ import {
   FiraSans_900Black_Italic,
 } from '@expo-google-fonts/fira-sans';
 import React from 'react';
-import DepartureBoard from './departureboard';
 
 const fontConfig = {
   default: {

@@ -10,10 +10,10 @@ export default function Index() {
       <Button
         mode="contained"
         onPress={() =>
-          router.push('../departureboard', { relativeToDirectory: true })
+          router.push('../departure-board', { relativeToDirectory: true })
         }
       >
-        Click me
+        Departure board
       </Button>
     </View>
   );

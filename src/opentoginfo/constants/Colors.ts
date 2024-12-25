@@ -44,11 +44,11 @@ export const Colors = {
   dark: {
     primary: 'rgb(0, 89, 207)',
     onPrimary: 'rgb(255, 255, 255)',
-    primaryContainer: 'rgb(13, 13, 13)',
+    primaryContainer: 'rgb(30, 30, 30)',
     onPrimaryContainer: 'rgb(240, 219, 255)',
     secondary: 'rgb(208, 193, 218)',
     onSecondary: 'rgb(54, 44, 63)',
-    secondaryContainer: 'rgb(77, 67, 87)',
+    secondaryContainer: 'rgb(14, 14, 14)',
     onSecondaryContainer: 'rgb(237, 221, 246)',
     tertiary: 'rgb(243, 183, 190)',
     onTertiary: 'rgb(75, 37, 43)',

@@ -1,11 +1,18 @@
-import { View, StyleSheet } from 'react-native';
-import { useTheme, Card, TouchableRipple, Text } from 'react-native-paper';
+import DeparturesView from '@/components/departures-view.component';
+import { StyleSheet } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 export default function DepartureBoard() {
   const theme = useTheme();
   return (
-    <View>
-      <Card style={[styles.card, { backgroundColor: theme.colors.backdrop }]}>
+    <DeparturesView />
+    /*     <View>
+      <Card
+        style={[
+          styles.card,
+          { backgroundColor: theme.colors.secondaryContainer },
+        ]}
+      >
         <TouchableRipple
           onPress={() => console.log('Ripple effect clicked')}
           borderless
@@ -18,7 +25,7 @@ export default function DepartureBoard() {
           </View>
         </TouchableRipple>
       </Card>
-    </View>
+    </View> */
   );
 }
 
