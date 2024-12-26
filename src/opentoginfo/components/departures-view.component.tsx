@@ -1,3 +1,4 @@
+import { MitTogDeparturesModel } from '@/models/mit-tog-departures.model';
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { useTheme, Text, TouchableRipple } from 'react-native-paper';
@@ -32,6 +33,10 @@ const mockData = [
     details: 'DSB',
   },
 ];
+
+interface DepartureViewProps {
+  departures: MitTogDeparturesModel;
+}
 
 export default function DeparturesView() {
   const theme = useTheme();
