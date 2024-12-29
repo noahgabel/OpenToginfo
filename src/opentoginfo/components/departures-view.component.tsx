@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { useTheme, Text, TouchableRipple } from 'react-native-paper';
 import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
+import DepartureAlertComponent from './departure-board/departure-alert.component';
 
 const mockData: DeparturesBoardModel[] = [
   {
@@ -11,6 +12,9 @@ const mockData: DeparturesBoardModel[] = [
     destination: ['Odense', 'Fredericia'],
     previousTrack: '2',
     newTrack: '3',
+    IsCancelled: false,
+    IsCancelledDeparture: false,
+    IsCancelledArrival: false,
     serviceProduct: {
       friendlyName: 'IC 4',
       primaryColor: '#f00',
@@ -19,12 +23,30 @@ const mockData: DeparturesBoardModel[] = [
   },
   {
     scheduledDepartureTime: '10:15',
-    estimatedDepartureTime: '10:20',
+    estimatedDepartureTime: null,
     destination: ['Aarhus'],
     previousTrack: '2',
     newTrack: '3',
+    IsCancelled: true,
+    IsCancelledDeparture: true,
+    IsCancelledArrival: true,
     serviceProduct: {
       friendlyName: 'IC 44',
+      primaryColor: '#f00',
+      secondaryColor: '#fff',
+    },
+  },
+  {
+    scheduledDepartureTime: '10:30',
+    estimatedDepartureTime: '10:35',
+    destination: ['Aalborg'],
+    previousTrack: '2',
+    newTrack: '3',
+    IsCancelled: false,
+    IsCancelledDeparture: false,
+    IsCancelledArrival: false,
+    serviceProduct: {
+      friendlyName: 'IC 3',
       primaryColor: '#f00',
       secondaryColor: '#fff',
     },
@@ -49,11 +71,7 @@ export default function DeparturesViewComponent() {
         ]}
       >
         <View style={styles.primaryRow}>
-          <DepartureTimeComponent
-            styles={styles.column}
-            scheduledDepartureTime={item.scheduledDepartureTime}
-            estimatedDepartureTime={item.estimatedDepartureTime}
-          />
+          <DepartureTimeComponent styles={styles.column} departureItem={item} />
           <DepartureDestinationComponent
             destination={item.destination}
             styles={[styles.column, styles.destination]}
@@ -62,9 +80,7 @@ export default function DeparturesViewComponent() {
           <Text style={styles.column}>{item.serviceProduct.friendlyName}</Text>
         </View>
         <View style={styles.secondaryRow}>
-          <Text style={[styles.details, { color: theme.colors.onBackground }]}>
-            Hej
-          </Text>
+          <DepartureAlertComponent departureItem={item} />
         </View>
       </View>
     </TouchableRipple>
@@ -98,7 +114,6 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   row: {
-    padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
@@ -106,6 +121,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 4,
+    padding: 8,
   },
   secondaryRow: {
     flexDirection: 'row',

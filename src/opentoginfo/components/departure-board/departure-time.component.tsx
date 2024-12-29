@@ -1,34 +1,43 @@
-import { TextStyle } from 'react-native';
-import { Text } from 'react-native-paper';
+import { TextStyle, StyleSheet } from 'react-native';
+import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureTimeComponentProps {
-  scheduledDepartureTime: string;
-  estimatedDepartureTime: string | null;
+  departureItem: DeparturesBoardModel;
   styles: TextStyle;
 }
 
 export default function DepartureTimeComponent({
-  scheduledDepartureTime,
-  estimatedDepartureTime,
+  departureItem,
   styles,
 }: DepartureTimeComponentProps) {
+  const theme = useTheme();
+
   return (
-    <Text style={styles}>
-      {estimatedDepartureTime ? (
+    <Text style={[styles, textStyles.TimeText]}>
+      {departureItem.estimatedDepartureTime ? (
         <>
           <Text
             style={[
               styles,
-              { textDecorationLine: 'line-through', color: 'red' },
+              {
+                textDecorationLine: 'line-through',
+                color: theme.colors.onSurfaceVariant,
+              },
             ]}
           >
-            {scheduledDepartureTime}
+            {departureItem.scheduledDepartureTime}
           </Text>{' '}
-          {estimatedDepartureTime}
+          {departureItem.estimatedDepartureTime}
         </>
       ) : (
-        scheduledDepartureTime
+        departureItem.scheduledDepartureTime
       )}
     </Text>
   );
 }
+
+const textStyles = StyleSheet.create({
+  TimeText: {
+    fontFamily: 'FiraSans_500Medium',
+  },
+});

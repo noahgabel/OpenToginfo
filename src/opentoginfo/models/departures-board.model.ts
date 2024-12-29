@@ -5,6 +5,9 @@ interface DeparturesBoardModel {
   newTrack: string;
   destination: string[];
   serviceProduct: ServiceProduct;
+  IsCancelled: boolean;
+  IsCancelledDeparture: boolean;
+  IsCancelledArrival: boolean;
 }
 
 interface ServiceProduct {
