@@ -2,19 +2,31 @@ import { TextStyle, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface DepartureDestinationComponentProps {
-  destination: string[];
+  departureItem: DeparturesBoardModel;
   styles: TextStyle | TextStyle[];
 }
 
 export default function DepartureDestinationComponent({
-  destination,
+  departureItem,
   styles,
 }: DepartureDestinationComponentProps) {
-  return (
-    <Text style={[textStyles.DestinationText, styles]}>
-      {destination.map((d) => d).join(', \n')}
-    </Text>
-  );
+  const text = departureItem.destination.map((d) => d).join(', \n');
+
+  if (departureItem.IsCancelled) {
+    return (
+      <Text
+        style={[
+          textStyles.DestinationText,
+          styles,
+          { color: 'red', textDecorationLine: 'line-through' },
+        ]}
+      >
+        {text}
+      </Text>
+    );
+  } else {
+    return <Text style={[textStyles.DestinationText, styles]}>{text}</Text>;
+  }
 }
 
 const textStyles = StyleSheet.create({

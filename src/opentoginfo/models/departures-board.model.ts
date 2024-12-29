@@ -1,8 +1,8 @@
 interface DeparturesBoardModel {
   scheduledDepartureTime: string;
   estimatedDepartureTime: string | null;
-  previousTrack: string;
-  newTrack: string;
+  newTrack: string | null;
+  originalTrack: string;
   destination: string[];
   serviceProduct: ServiceProduct;
   IsCancelled: boolean;

@@ -4,14 +4,15 @@ import { useTheme, Text, TouchableRipple } from 'react-native-paper';
 import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
 import DepartureAlertComponent from './departure-board/departure-alert.component';
+import DepartureTrackComponent from './departure-board/departure-track.component';
 
 const mockData: DeparturesBoardModel[] = [
   {
     scheduledDepartureTime: '10:00',
     estimatedDepartureTime: '10:05',
     destination: ['Odense', 'Fredericia'],
-    previousTrack: '2',
-    newTrack: '3',
+    newTrack: '2',
+    originalTrack: '3',
     IsCancelled: false,
     IsCancelledDeparture: false,
     IsCancelledArrival: false,
@@ -25,8 +26,8 @@ const mockData: DeparturesBoardModel[] = [
     scheduledDepartureTime: '10:15',
     estimatedDepartureTime: null,
     destination: ['Aarhus'],
-    previousTrack: '2',
-    newTrack: '3',
+    newTrack: '2',
+    originalTrack: '3',
     IsCancelled: true,
     IsCancelledDeparture: true,
     IsCancelledArrival: true,
@@ -40,8 +41,8 @@ const mockData: DeparturesBoardModel[] = [
     scheduledDepartureTime: '10:30',
     estimatedDepartureTime: '10:35',
     destination: ['Aalborg'],
-    previousTrack: '2',
-    newTrack: '3',
+    newTrack: '2',
+    originalTrack: '3',
     IsCancelled: false,
     IsCancelledDeparture: false,
     IsCancelledArrival: false,
@@ -73,10 +74,13 @@ export default function DeparturesViewComponent() {
         <View style={styles.primaryRow}>
           <DepartureTimeComponent styles={styles.column} departureItem={item} />
           <DepartureDestinationComponent
-            destination={item.destination}
+            departureItem={item}
             styles={[styles.column, styles.destination]}
           />
-          <Text style={styles.column}>{item.newTrack}</Text>
+          <DepartureTrackComponent
+            departureItem={item}
+            styles={styles.column}
+          />
           <Text style={styles.column}>{item.serviceProduct.friendlyName}</Text>
         </View>
         <View style={styles.secondaryRow}>
