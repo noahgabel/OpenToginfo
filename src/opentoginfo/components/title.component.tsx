@@ -5,7 +5,7 @@ interface TitleProps {
   children?: React.ReactNode;
 }
 
-export default function Title({ children }: TitleProps) {
+export default function TitleComponent({ children }: TitleProps) {
   return (
     <View>
       <Text

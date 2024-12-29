@@ -1,44 +1,37 @@
-import { MitTogDeparturesModel } from '@/models/mit-tog-departures.model';
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { useTheme, Text, TouchableRipple } from 'react-native-paper';
+import DepartureTimeComponent from './departure-board/departure-time.component';
+import DepartureDestinationComponent from './departure-board/departure-destination.component';
 
-const mockData = [
+const mockData: DeparturesBoardModel[] = [
   {
-    id: '1',
-    time: '12:34',
-    newTime: '12:35',
-    to: 'Copenhagen',
-    track: '5',
-    train: 'IC 1234',
-    details: 'DSB',
+    scheduledDepartureTime: '10:00',
+    estimatedDepartureTime: '10:05',
+    destination: ['Odense', 'Fredericia'],
+    previousTrack: '2',
+    newTrack: '3',
+    serviceProduct: {
+      friendlyName: 'IC 4',
+      primaryColor: '#f00',
+      secondaryColor: '#fff',
+    },
   },
   {
-    id: '2',
-    time: '13:00',
-    newTime: '13:01',
-    to: 'Aarhus,',
-    toExtra: 'Fredericia',
-    track: '2',
-    train: 'RE 5678',
-    details: 'Gokke kollektivet',
-  },
-  {
-    id: '3',
-    time: '13:45',
-    newTime: '13:46',
-    to: 'Odense',
-    track: '3',
-    train: 'IC 9101',
-    details: 'DSB',
+    scheduledDepartureTime: '10:15',
+    estimatedDepartureTime: '10:20',
+    destination: ['Aarhus'],
+    previousTrack: '2',
+    newTrack: '3',
+    serviceProduct: {
+      friendlyName: 'IC 44',
+      primaryColor: '#f00',
+      secondaryColor: '#fff',
+    },
   },
 ];
 
-interface DepartureViewProps {
-  departures: MitTogDeparturesModel;
-}
-
-export default function DeparturesView() {
+export default function DeparturesViewComponent() {
   const theme = useTheme();
 
   const renderItem = ({ item }: { item: (typeof mockData)[0] }) => (
@@ -56,18 +49,21 @@ export default function DeparturesView() {
         ]}
       >
         <View style={styles.primaryRow}>
-          <Text style={styles.column}>
-            {item.time} {item.newTime}
-          </Text>
-          <Text style={[styles.column, styles.destination]}>
-            {item.to} {item.toExtra}
-          </Text>
-          <Text style={styles.column}>{item.track}</Text>
-          <Text style={styles.column}>{item.train}</Text>
+          <DepartureTimeComponent
+            styles={styles.column}
+            scheduledDepartureTime={item.scheduledDepartureTime}
+            estimatedDepartureTime={item.estimatedDepartureTime}
+          />
+          <DepartureDestinationComponent
+            destination={item.destination}
+            styles={[styles.column, styles.destination]}
+          />
+          <Text style={styles.column}>{item.newTrack}</Text>
+          <Text style={styles.column}>{item.serviceProduct.friendlyName}</Text>
         </View>
         <View style={styles.secondaryRow}>
           <Text style={[styles.details, { color: theme.colors.onBackground }]}>
-            {item.details}
+            Hej
           </Text>
         </View>
       </View>
@@ -90,7 +86,7 @@ export default function DeparturesView() {
       <FlatList
         data={mockData}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.serviceProduct.friendlyName}
       />
     </View>
   );

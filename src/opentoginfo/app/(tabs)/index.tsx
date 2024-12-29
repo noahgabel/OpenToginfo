@@ -1,4 +1,4 @@
-import Title from '@/components/title.component';
+import TitleComponent from '@/components/title.component';
 import { router } from 'expo-router';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -6,7 +6,7 @@ import { Button } from 'react-native-paper';
 export default function Index() {
   return (
     <View>
-      <Title>Stations</Title>
+      <TitleComponent>Stations</TitleComponent>
       <Button
         mode="contained"
         onPress={() =>

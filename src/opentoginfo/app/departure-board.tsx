@@ -1,4 +1,4 @@
-import DeparturesView from '@/components/departures-view.component';
+import DeparturesViewComponent from '@/components/departures-view.component';
 import { MitTogDeparturesModel } from '@/models/mit-tog-departures.model';
 import { useEffect, useState } from 'react';
 
@@ -22,5 +22,5 @@ export default function DepartureBoard() {
     };
   }, []);
 
-  return <DeparturesView />;
+  return <DeparturesViewComponent />;
 }
