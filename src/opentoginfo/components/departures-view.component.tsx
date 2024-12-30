@@ -5,8 +5,9 @@ import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
 import DepartureAlertComponent from './departure-board/departure-alert.component';
 import DepartureTrackComponent from './departure-board/departure-track.component';
+import DepartureServiceProductComponent from './departure-board/departure-service-product.component';
 
-const mockData: DeparturesBoardModel[] = [
+const mockData: DepartureBoardModel[] = [
   {
     scheduledDepartureTime: '10:00',
     estimatedDepartureTime: '10:05',
@@ -81,7 +82,10 @@ export default function DeparturesViewComponent() {
             departureItem={item}
             styles={styles.column}
           />
-          <Text style={styles.column}>{item.serviceProduct.friendlyName}</Text>
+          <DepartureServiceProductComponent
+            styles={styles.column}
+            departureItem={item}
+          />
         </View>
         <View style={styles.secondaryRow}>
           <DepartureAlertComponent departureItem={item} />

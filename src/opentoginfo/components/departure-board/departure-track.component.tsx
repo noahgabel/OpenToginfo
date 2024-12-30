@@ -2,7 +2,7 @@ import { TextStyle } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureTrackComponentProps {
-  departureItem: DeparturesBoardModel;
+  departureItem: DepartureBoardModel;
   styles: TextStyle;
 }
 

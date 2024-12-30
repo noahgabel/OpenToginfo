@@ -2,7 +2,7 @@ import { View, StyleSheet } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureAlertComponentProps {
-  departureItem: DeparturesBoardModel;
+  departureItem: DepartureBoardModel;
 }
 
 export default function DepartureAlertComponent({

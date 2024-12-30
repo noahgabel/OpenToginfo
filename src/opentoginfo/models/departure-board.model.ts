@@ -1,4 +1,4 @@
-interface DeparturesBoardModel {
+interface DepartureBoardModel {
   scheduledDepartureTime: string;
   estimatedDepartureTime: string | null;
   newTrack: string | null;

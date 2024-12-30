@@ -2,7 +2,7 @@ import { TextStyle, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface DepartureDestinationComponentProps {
-  departureItem: DeparturesBoardModel;
+  departureItem: DepartureBoardModel;
   styles: TextStyle | TextStyle[];
 }
 
