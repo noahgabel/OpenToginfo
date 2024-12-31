@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { useTheme, Text, TouchableRipple } from 'react-native-paper';
 import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
-import DepartureAlertComponent from './departure-board/departure-alert.component';
 import DepartureTrackComponent from './departure-board/departure-track.component';
 import DepartureServiceProductComponent from './departure-board/departure-service-product.component';
 
@@ -88,7 +87,16 @@ export default function DeparturesViewComponent() {
           />
         </View>
         <View style={styles.secondaryRow}>
-          <DepartureAlertComponent departureItem={item} />
+          <View style={{ width: 150, height: 25, overflow: 'hidden' }}>
+            <Image
+              source={require('../assets/units/MFA-FF.png')}
+              style={{
+                height: 25,
+                width: 200, // Larger than the parent to allow cropping
+                resizeMode: 'cover',
+              }}
+            />
+          </View>
         </View>
       </View>
     </TouchableRipple>
@@ -133,7 +141,7 @@ const styles = StyleSheet.create({
   },
   secondaryRow: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
   },
   column: {
     flex: 1,
