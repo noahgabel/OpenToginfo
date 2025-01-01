@@ -5,6 +5,7 @@ import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
 import DepartureTrackComponent from './departure-board/departure-track.component';
 import DepartureServiceProductComponent from './departure-board/departure-service-product.component';
+import DepartureAlertComponent from './departure-board/departure-alert.component';
 
 const mockData: DepartureBoardModel[] = [
   {
@@ -98,6 +99,9 @@ export default function DeparturesViewComponent() {
             />
           </View>
         </View>
+        <View style={styles.thirdRow}>
+          <DepartureAlertComponent departureItem={item} />
+        </View>
       </View>
     </TouchableRipple>
   );
@@ -142,6 +146,11 @@ const styles = StyleSheet.create({
   secondaryRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  thirdRow: {
+    paddingTop: 4,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   column: {
     flex: 1,
