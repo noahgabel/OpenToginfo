@@ -167,7 +167,7 @@ export default function RootLayout() {
           }}
         >
           <Stack screenOptions={{contentStyle:{backgroundColor: navigationTheme.colors.background}}}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, headerStyle: { backgroundColor: navigationTheme.colors.background }}} />
           </Stack>
         </View>
       </ThemeProvider>
