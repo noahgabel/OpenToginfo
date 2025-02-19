@@ -1,8 +1,9 @@
+import { Train } from '@/models/mit-tog-departures.model';
 import { View, ViewStyle, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface DepartureServiceProductComponentProps {
-  departureItem: DepartureBoardModel;
+  departureItem: Train;
   styles: ViewStyle;
 }
 
@@ -15,16 +16,11 @@ export default function DepartureServiceProductComponent({
       style={[
         styles,
         viewStyles.ServiceProduct,
-        { backgroundColor: departureItem.serviceProduct.primaryColor },
+        { backgroundColor: 'transparent' },
       ]}
     >
-      <Text
-        style={[
-          textStyles.Text,
-          { color: departureItem.serviceProduct.secondaryColor },
-        ]}
-      >
-        {departureItem.serviceProduct.friendlyName}
+      <Text style={[textStyles.Text]}>
+        {departureItem.Product} {departureItem.TrainId}
       </Text>
     </View>
   );

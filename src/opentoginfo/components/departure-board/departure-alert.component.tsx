@@ -1,8 +1,9 @@
+import { Train } from '@/models/mit-tog-departures.model';
 import { View, StyleSheet } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureAlertComponentProps {
-  departureItem: DepartureBoardModel;
+  departureItem: Train;
 }
 
 export default function DepartureAlertComponent({

@@ -23,11 +23,9 @@ const Layout = () => {
             height: 55,
             backgroundColor: theme.colors.card,
           },
-          tabBarActiveTintColor: theme.colors.text,
-          tabBarInactiveTintColor: theme.colors.text,
-          tabBarLabelStyle: { fontSize: 12 },
-          headerStyle: { backgroundColor: theme.colors.card },
-          headerTitleStyle: { paddingTop: 5, color: theme.colors.text },
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="home" size={24} color={color} />
+          ),
         }}
       >
         <Tabs.Screen

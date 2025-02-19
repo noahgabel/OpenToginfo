@@ -1,5 +1,5 @@
 import { SplashScreen, Stack } from 'expo-router';
-import { StatusBar, useColorScheme, View, Appearance } from 'react-native';
+import { StatusBar, View, Appearance } from 'react-native';
 import {
   configureFonts,
   MD3DarkTheme,
@@ -36,6 +36,8 @@ import {
   FiraSans_900Black_Italic,
 } from '@expo-google-fonts/fira-sans';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../state/store';
 
 const fontConfig = {
   default: {
@@ -159,17 +161,33 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme as any}>
-        <StatusBar backgroundColor={navigationTheme.colors.error} />
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: navigationTheme.colors.background,
-          }}
-        >
-          <Stack screenOptions={{contentStyle:{backgroundColor: navigationTheme.colors.background}}}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false, headerStyle: { backgroundColor: navigationTheme.colors.background }}} />
-          </Stack>
-        </View>
+        <Provider store={store}>
+          <StatusBar backgroundColor={navigationTheme.colors.background} />
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: navigationTheme.colors.background,
+            }}
+          >
+            <Stack
+              screenOptions={{
+                contentStyle: {
+                  backgroundColor: navigationTheme.colors.background,
+                },
+              }}
+            >
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  headerShown: false,
+                  headerStyle: {
+                    backgroundColor: navigationTheme.colors.background,
+                  },
+                }}
+              />
+            </Stack>
+          </View>
+        </Provider>
       </ThemeProvider>
     </PaperProvider>
   );
