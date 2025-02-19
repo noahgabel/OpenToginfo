@@ -1,21 +1,26 @@
 import { Tabs } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { Platform, View } from 'react-native';
+
 
 const Layout = () => {
   const theme = useTheme();
+  const isDarkTheme = theme.dark;
 
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: theme.colors.card,
+          paddingBottom: Platform.OS === 'ios' ? 20 : 0,
           borderTopWidth: 0,
           height: 55,
         },
+        tabBarBackground: () => (
+          <View style={{ flex: 1, backgroundColor: isDarkTheme ? DarkTheme.colors.card : DefaultTheme.colors.card }} />
+        ),
         tabBarActiveTintColor: theme.colors.text,
         tabBarLabelStyle: { fontSize: 12 },
-        tabBarIconStyle: { margin: 0, padding: 0 },
         headerStyle: { backgroundColor: theme.colors.card },
         headerTitleStyle: { paddingTop: 5 },
       }}

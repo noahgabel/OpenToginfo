@@ -1,5 +1,5 @@
 import { SplashScreen, Stack } from 'expo-router';
-import { StatusBar, useColorScheme, View } from 'react-native';
+import { StatusBar, useColorScheme, View, Appearance } from 'react-native';
 import {
   configureFonts,
   MD3DarkTheme,
@@ -144,7 +144,7 @@ export default function RootLayout() {
     }
   }, [loaded, error]);
 
-  const colorScheme = useColorScheme();
+  const colorScheme = Appearance.getColorScheme();
 
   const paperTheme =
     colorScheme === 'dark' ? customDarkTheme : customLightTheme;
@@ -159,14 +159,14 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme as any}>
-        <StatusBar backgroundColor={navigationTheme.colors.background} />
+        <StatusBar backgroundColor={navigationTheme.colors.error} />
         <View
           style={{
             flex: 1,
             backgroundColor: navigationTheme.colors.background,
           }}
         >
-          <Stack>
+          <Stack screenOptions={{contentStyle:{backgroundColor: navigationTheme.colors.background}}}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
         </View>
