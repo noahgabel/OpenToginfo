@@ -3,13 +3,15 @@ import { MitTogDeparturesModel } from '@/models/mit-tog-departures.model';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDepartures } from '@/state/departure-reducer';
+import { useAppSelector } from '@/state/hooks';
 
 export default function DepartureBoard() {
   const dispatch = useDispatch();
+  const activeStationId = useAppSelector((state) => state.auth.activeStationId);
 
   useEffect(() => {
     const ws = new WebSocket(
-      'wss://api.mittog.dk/api/ws/departure/KH/dinstation/',
+      `wss://api.mittog.dk/api/ws/${activeStationId}/KH/dinstation/`,
     );
 
     ws.onmessage = (event) => {

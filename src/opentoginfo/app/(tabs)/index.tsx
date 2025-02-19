@@ -4,8 +4,11 @@ import { View } from 'react-native';
 import { Button, Searchbar } from 'react-native-paper';
 import { useState } from 'react';
 import stationData from '@/assets/data/stationData.json';
+import { useDispatch } from 'react-redux';
+import { setActiveStationId } from '@/state/departure-reducer';
 
 export default function Index() {
+  const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = (query: string) => setSearchQuery(query);
@@ -28,7 +31,7 @@ export default function Index() {
           style={{ marginBottom: 15 }}
           key={station.id}
           mode="outlined"
-          onPress={() => router.push(`../station/${station.id}`)}
+          onPress={() => onClickOfStation(station.id)}
         >
           {station.name}
         </Button>
@@ -41,4 +44,10 @@ export default function Index() {
       </Button>
     </View>
   );
+
+  function onClickOfStation(id: string): void {
+    dispatch(setActiveStationId(id));
+
+    return router.push(`../departure-board/`);
+  }
 }
