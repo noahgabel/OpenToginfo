@@ -159,15 +159,29 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme as any}>
-        <StatusBar backgroundColor={navigationTheme.colors.error} />
+        <StatusBar backgroundColor={navigationTheme.colors.background} />
         <View
           style={{
             flex: 1,
             backgroundColor: navigationTheme.colors.background,
           }}
         >
-          <Stack screenOptions={{contentStyle:{backgroundColor: navigationTheme.colors.background}}}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false, headerStyle: { backgroundColor: navigationTheme.colors.background }}} />
+          <Stack
+            screenOptions={{
+              contentStyle: {
+                backgroundColor: navigationTheme.colors.background,
+              },
+            }}
+          >
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+                headerStyle: {
+                  backgroundColor: navigationTheme.colors.background,
+                },
+              }}
+            />
           </Stack>
         </View>
       </ThemeProvider>
