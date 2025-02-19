@@ -44,6 +44,19 @@ const Layout = () => {
           }}
         />
         <Tabs.Screen
+          name="favorites"
+          options={{
+            title: 'Favorites',
+            headerShown: false,
+            headerBackgroundContainerStyle: {
+              backgroundColor: theme.colors.card,
+            },
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="star" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="settings"
           options={{
             title: 'Settings',
