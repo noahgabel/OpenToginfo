@@ -1,6 +1,10 @@
 import { Tabs } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
 import { Platform, View, StyleSheet, Text } from 'react-native';
 import { useColorScheme } from 'react-native';
 
@@ -11,7 +15,7 @@ const Layout = () => {
   return (
     <NavigationContainer theme={theme}>
       <Tabs
-      sceneContainerStyle={{ backgroundColor: theme.colors.card }}
+        sceneContainerStyle={{ backgroundColor: theme.colors.card }}
         screenOptions={{
           tabBarStyle: {
             paddingBottom: Platform.OS === 'ios' ? 20 : 0,
@@ -31,7 +35,9 @@ const Layout = () => {
           options={{
             title: 'Home',
             headerShown: false,
-            headerBackgroundContainerStyle: { backgroundColor: theme.colors.card },
+            headerBackgroundContainerStyle: {
+              backgroundColor: theme.colors.card,
+            },
             tabBarIcon: ({ color }) => (
               <AntDesign name="home" size={24} color={color} />
             ),
@@ -41,7 +47,9 @@ const Layout = () => {
           name="settings"
           options={{
             title: 'Settings',
-            headerBackgroundContainerStyle: { backgroundColor: theme.colors.card },
+            headerBackgroundContainerStyle: {
+              backgroundColor: theme.colors.card,
+            },
             tabBarIcon: ({ color }) => (
               <AntDesign name="setting" size={24} color={color} />
             ),
