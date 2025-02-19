@@ -23,6 +23,7 @@ const Layout = () => {
         tabBarLabelStyle: { fontSize: 12 },
         headerStyle: { backgroundColor: theme.colors.card },
         headerTitleStyle: { paddingTop: 5 },
+        sceneStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Tabs.Screen
