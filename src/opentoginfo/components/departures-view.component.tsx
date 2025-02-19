@@ -1,64 +1,24 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { useTheme, Text, TouchableRipple } from 'react-native-paper';
+import { useAppSelector } from '../state/hooks';
 import DepartureTimeComponent from './departure-board/departure-time.component';
 import DepartureDestinationComponent from './departure-board/departure-destination.component';
 import DepartureTrackComponent from './departure-board/departure-track.component';
 import DepartureServiceProductComponent from './departure-board/departure-service-product.component';
 import DepartureAlertComponent from './departure-board/departure-alert.component';
-
-const mockData: DepartureBoardModel[] = [
-  {
-    scheduledDepartureTime: '10:00',
-    estimatedDepartureTime: '10:05',
-    destination: ['Odense', 'Fredericia'],
-    newTrack: '2',
-    originalTrack: '3',
-    IsCancelled: false,
-    IsCancelledDeparture: false,
-    IsCancelledArrival: false,
-    serviceProduct: {
-      friendlyName: 'IC 4',
-      primaryColor: '#f00',
-      secondaryColor: '#fff',
-    },
-  },
-  {
-    scheduledDepartureTime: '10:15',
-    estimatedDepartureTime: null,
-    destination: ['Aarhus'],
-    newTrack: '2',
-    originalTrack: '3',
-    IsCancelled: true,
-    IsCancelledDeparture: true,
-    IsCancelledArrival: true,
-    serviceProduct: {
-      friendlyName: 'IC 44',
-      primaryColor: '#f00',
-      secondaryColor: '#fff',
-    },
-  },
-  {
-    scheduledDepartureTime: '10:30',
-    estimatedDepartureTime: '10:35',
-    destination: ['Aalborg'],
-    newTrack: '2',
-    originalTrack: '3',
-    IsCancelled: false,
-    IsCancelledDeparture: false,
-    IsCancelledArrival: false,
-    serviceProduct: {
-      friendlyName: 'IC 3',
-      primaryColor: '#f00',
-      secondaryColor: '#fff',
-    },
-  },
-];
+import {
+  MitTogDeparturesModel,
+  Train,
+} from '../models/mit-tog-departures.model';
 
 export default function DeparturesViewComponent() {
   const theme = useTheme();
+  const departures = useAppSelector(
+    (state) => state.auth.departures,
+  ) as MitTogDeparturesModel | null;
 
-  const renderItem = ({ item }: { item: (typeof mockData)[0] }) => (
+  const renderItem = ({ item }: { item: Train }) => (
     <TouchableRipple
       onPress={() => console.log('Ripple effect clicked')}
       borderless
@@ -120,9 +80,9 @@ export default function DeparturesViewComponent() {
         <Text style={styles.column}>Train</Text>
       </View>
       <FlatList
-        data={mockData}
+        data={departures?.data.Trains || []}
         renderItem={renderItem}
-        keyExtractor={(item) => item.serviceProduct.friendlyName}
+        keyExtractor={(item) => item.TrainId}
       />
     </View>
   );

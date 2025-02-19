@@ -1,8 +1,9 @@
+import { Train } from '@/models/mit-tog-departures.model';
 import { TextStyle } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureTrackComponentProps {
-  departureItem: DepartureBoardModel;
+  departureItem: Train;
   styles: TextStyle;
 }
 
@@ -14,7 +15,7 @@ export default function DepartureTrackComponent({
 
   return (
     <Text style={[styles]}>
-      {departureItem.newTrack ? (
+      {departureItem.TrackCurrent ? (
         <>
           <Text
             style={[
@@ -25,12 +26,12 @@ export default function DepartureTrackComponent({
               },
             ]}
           >
-            {departureItem.originalTrack}
+            {departureItem.TrackPrevious}
           </Text>{' '}
-          {departureItem.newTrack}
+          {departureItem.TrackCurrent}
         </>
       ) : (
-        departureItem.originalTrack
+        departureItem.TrackPrevious
       )}
     </Text>
   );
