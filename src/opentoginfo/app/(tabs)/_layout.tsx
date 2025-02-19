@@ -1,10 +1,13 @@
 import { Tabs } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useTheme } from '@react-navigation/native';
 
-export default function TabLayout() {
+const Layout = () => {
+  const theme = useTheme();
+
   return (
     <Tabs
-      screenOptions={({ theme }) => ({
+      screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.colors.card,
           borderTopWidth: 0,
@@ -15,7 +18,7 @@ export default function TabLayout() {
         tabBarIconStyle: { margin: 0, padding: 0 },
         headerStyle: { backgroundColor: theme.colors.card },
         headerTitleStyle: { paddingTop: 5 },
-      })}
+      }}
     >
       <Tabs.Screen
         name="index"
@@ -38,4 +41,7 @@ export default function TabLayout() {
       />
     </Tabs>
   );
-}
+};
+
+export default Layout;
+
