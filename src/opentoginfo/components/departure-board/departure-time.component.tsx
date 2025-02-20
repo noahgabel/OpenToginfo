@@ -31,6 +31,7 @@ export default function DepartureTimeComponent({
               {
                 textDecorationLine: 'line-through',
                 color: theme.colors.onSurfaceVariant,
+                fontSize: 18,
               },
             ]}
           >
@@ -48,5 +49,6 @@ export default function DepartureTimeComponent({
 const textStyles = StyleSheet.create({
   TimeText: {
     fontFamily: 'FiraSans_500Medium',
+    fontSize: 18,
   },
 });

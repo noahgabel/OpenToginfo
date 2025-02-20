@@ -5,7 +5,7 @@ export function mapMitTogToServiceProduct(Train: Train): ServiceProduct {
 
   const serviceProduct: ServiceProduct = {
     trainId: Train.TrainId,
-    friendlyName: Train.Product + ' ' + Train.PublicTrainId,
+    friendlyName: getProductName(Train.Product) + ' ' + Train.PublicTrainId,
     primaryColor,
     secondaryColor,
   };
@@ -17,20 +17,25 @@ function getColors(train: Train): {
   primaryColor: string;
   secondaryColor: string;
 } {
-  switch (train.Product.toUpperCase()) {
+  switch (getProductName(train.Product).toUpperCase()) {
     case 'RE':
       return {
         primaryColor: 'rgb(71, 164, 64)',
         secondaryColor: 'rgb(255, 255, 255)',
       };
-    case 'ØP':
+    case 'IC':
       return {
-        primaryColor: 'rgb(71, 164, 64)',
+        primaryColor: 'rgb(239 65 48)',
         secondaryColor: 'rgb(255, 255, 255)',
       };
-    case 'RØ':
+    case 'ICL':
       return {
-        primaryColor: 'rgb(71, 164, 64)',
+        primaryColor: 'rgb(253 186 88)',
+        secondaryColor: 'rgb(0, 0, 0)',
+      };
+    case 'EC':
+      return {
+        primaryColor: 'rgb(42, 105, 150)',
         secondaryColor: 'rgb(255, 255, 255)',
       };
     default:
@@ -38,5 +43,20 @@ function getColors(train: Train): {
         primaryColor: 'rgb(128, 128, 128)',
         secondaryColor: 'rgb(169, 169, 169)',
       };
+  }
+}
+
+function getProductName(product: string) {
+  switch (product.toUpperCase()) {
+    case 'RE':
+      return 'Re';
+    case 'ØP':
+      return 'Re';
+    case 'RØ':
+      return 'Re';
+    case 'L':
+      return 'ICL';
+    default:
+      return product;
   }
 }
