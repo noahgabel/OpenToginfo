@@ -1,9 +1,8 @@
-import { Train } from '@/models/mit-tog-departures.model';
 import { TextStyle, StyleSheet } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureTimeComponentProps {
-  departureItem: Train;
+  departureItem: DepartureBoardModel;
   styles: TextStyle;
 }
 
@@ -13,9 +12,18 @@ export default function DepartureTimeComponent({
 }: DepartureTimeComponentProps) {
   const theme = useTheme();
 
+  const formatTime = (time: string) => {
+    const date = new Date(time);
+    return date.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
+
   return (
     <Text style={[styles, textStyles.TimeText]}>
-      {departureItem.EstimatedTimeDeparture ? (
+      {departureItem.estimatedDepartureTime ? (
         <>
           <Text
             style={[
@@ -26,12 +34,12 @@ export default function DepartureTimeComponent({
               },
             ]}
           >
-            {departureItem.ScheduleTimeDeparture}
+            {formatTime(departureItem.scheduledDepartureTime)}
           </Text>{' '}
-          {departureItem.EstimatedTimeDeparture}
+          {formatTime(departureItem.estimatedDepartureTime)}
         </>
       ) : (
-        departureItem.ScheduleTimeDeparture
+        formatTime(departureItem.scheduledDepartureTime)
       )}
     </Text>
   );

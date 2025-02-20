@@ -1,7 +1,7 @@
 import { View, StyleSheet, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native-paper';
-import stationData from '../../assets/data/stationData.json';
+import stationData from '../../assets/data/stations.json';
 
 export default function Favorites() {
   interface FavoriteItem {
@@ -18,7 +18,7 @@ export default function Favorites() {
           ...item,
           id: Number(item.id),
         }));
-        setData(formattedData);
+        //setData(formattedData);
       } catch (error) {
         console.log('Error loading data:', error);
       }

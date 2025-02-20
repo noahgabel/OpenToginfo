@@ -11,6 +11,7 @@ interface DepartureBoardModel {
 }
 
 interface ServiceProduct {
+  trainId: string;
   friendlyName: string;
   primaryColor: string;
   secondaryColor: string;

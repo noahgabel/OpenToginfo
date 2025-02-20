@@ -7,18 +7,20 @@ import DepartureDestinationComponent from './departure-board/departure-destinati
 import DepartureTrackComponent from './departure-board/departure-track.component';
 import DepartureServiceProductComponent from './departure-board/departure-service-product.component';
 import DepartureAlertComponent from './departure-board/departure-alert.component';
-import {
-  MitTogDeparturesModel,
-  Train,
-} from '../models/mit-tog-departures.model';
+import { MitTogDeparturesModel } from '../models/mit-tog-departures.model';
+import { mapMitTogToDepartureBoard } from '@/strategy/mit-tog-mapper';
 
 export default function DeparturesViewComponent() {
   const theme = useTheme();
-  const departures = useAppSelector(
+  const mitTogDepartures = useAppSelector(
     (state) => state.auth.departures,
   ) as MitTogDeparturesModel | null;
 
-  const renderItem = ({ item }: { item: Train }) => (
+  const departures = mitTogDepartures
+    ? mapMitTogToDepartureBoard(mitTogDepartures)
+    : [];
+
+  const renderItem = ({ item }: { item: DepartureBoardModel }) => (
     <TouchableRipple
       onPress={() => console.log('Ripple effect clicked')}
       borderless
@@ -80,9 +82,9 @@ export default function DeparturesViewComponent() {
         <Text style={styles.column}>Train</Text>
       </View>
       <FlatList
-        data={departures?.data.Trains || []}
+        data={departures || []}
         renderItem={renderItem}
-        keyExtractor={(item) => item.TrainId}
+        keyExtractor={(item) => item.serviceProduct.trainId}
       />
     </View>
   );

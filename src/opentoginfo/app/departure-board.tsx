@@ -11,7 +11,7 @@ export default function DepartureBoard() {
 
   useEffect(() => {
     const ws = new WebSocket(
-      `wss://api.mittog.dk/api/ws/${activeStationId}/KH/dinstation/`,
+      `wss://api.mittog.dk/api/ws/departure/${activeStationId}/dinstation/`,
     );
 
     ws.onmessage = (event) => {

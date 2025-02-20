@@ -3,7 +3,7 @@ import { TextStyle } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 interface DepartureTrackComponentProps {
-  departureItem: Train;
+  departureItem: DepartureBoardModel;
   styles: TextStyle;
 }
 
@@ -15,7 +15,7 @@ export default function DepartureTrackComponent({
 
   return (
     <Text style={[styles]}>
-      {departureItem.TrackCurrent ? (
+      {departureItem.newTrack ? (
         <>
           <Text
             style={[
@@ -26,12 +26,12 @@ export default function DepartureTrackComponent({
               },
             ]}
           >
-            {departureItem.TrackPrevious}
+            {departureItem.originalTrack}
           </Text>{' '}
-          {departureItem.TrackCurrent}
+          {departureItem.newTrack}
         </>
       ) : (
-        departureItem.TrackPrevious
+        departureItem.originalTrack
       )}
     </Text>
   );

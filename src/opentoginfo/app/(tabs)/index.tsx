@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { View } from 'react-native';
 import { Button, Searchbar } from 'react-native-paper';
 import { useState } from 'react';
-import stationData from '@/assets/data/stationData.json';
+import stationData from '@/assets/data/stations.json';
 import { useDispatch } from 'react-redux';
 import { setActiveStationId } from '@/state/departure-reducer';
 
@@ -13,9 +13,17 @@ export default function Index() {
 
   const onChangeSearch = (query: string) => setSearchQuery(query);
 
-  const filteredStations = stationData.filter((station) =>
-    station.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const filteredStations = stationData
+    .filter(
+      (station) =>
+        station.searchable &&
+        station.regional &&
+        (station.stationName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+          station.stationId.toLowerCase().includes(searchQuery.toLowerCase())),
+    )
+    .slice(0, 10);
 
   return (
     <View>
@@ -28,20 +36,14 @@ export default function Index() {
       />
       {filteredStations.map((station) => (
         <Button
-          style={{ marginBottom: 15 }}
+          style={{ marginBottom: 5 }}
           key={station.id}
           mode="outlined"
-          onPress={() => onClickOfStation(station.id)}
+          onPress={() => onClickOfStation(station.stationId)}
         >
-          {station.name}
+          {station.stationName}
         </Button>
       ))}
-      <Button
-        mode="contained"
-        onPress={() => router.push('../departure-board')}
-      >
-        Departure board
-      </Button>
     </View>
   );
 

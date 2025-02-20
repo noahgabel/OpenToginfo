@@ -1,9 +1,8 @@
-import { Train } from '@/models/mit-tog-departures.model';
 import { TextStyle, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface DepartureDestinationComponentProps {
-  departureItem: Train;
+  departureItem: DepartureBoardModel;
   styles: TextStyle | TextStyle[];
 }
 
@@ -11,9 +10,7 @@ export default function DepartureDestinationComponent({
   departureItem,
   styles,
 }: DepartureDestinationComponentProps) {
-  const text = departureItem.Routes.map(
-    (route) => route.DestinationStationId,
-  ).join(' - ');
+  const text = departureItem.destination.map((d) => d).join(', \n');
 
   if (departureItem.IsCancelled) {
     return (
