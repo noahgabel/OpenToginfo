@@ -63,6 +63,7 @@ export default function DepartureBoard() {
 
       try {
         await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(favorites));
+        console.log('Favorites written to file:', favorites);
       } catch (error) {
         console.error('Error writing to favorites file:', error);
       }
