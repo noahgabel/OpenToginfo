@@ -13,7 +13,7 @@ import { mapMitTogToDepartureBoard } from '@/strategy/mit-tog-mapper';
 export default function DeparturesViewComponent() {
   const theme = useTheme();
   const mitTogDepartures = useAppSelector(
-    (state) => state.auth.departures,
+    (state) => state.departure.departures,
   ) as MitTogDeparturesModel | null;
 
   const departures = mitTogDepartures

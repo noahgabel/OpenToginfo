@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MitTogDeparturesModel } from '../models/mit-tog-departures.model';
+import { StationModel } from '@/models/stations';
 
 interface DepartureState {
   departures: MitTogDeparturesModel | null;
-  activeStationId: string | null;
+  activeStation: StationModel | null;
 }
 
 const initialState: DepartureState = {
   departures: null,
-  activeStationId: null,
+  activeStation: null,
 };
 
 const departureSlice = createSlice({
@@ -18,11 +19,11 @@ const departureSlice = createSlice({
     setDepartures(state, action: PayloadAction<MitTogDeparturesModel>) {
       state.departures = action.payload;
     },
-    setActiveStationId(state, action: PayloadAction<string>) {
-      state.activeStationId = action.payload;
+    setActiveStation(state, action: PayloadAction<StationModel>) {
+      state.activeStation = action.payload;
     },
   },
 });
 
-export const { setDepartures, setActiveStationId } = departureSlice.actions;
+export const { setDepartures, setActiveStation } = departureSlice.actions;
 export default departureSlice.reducer;

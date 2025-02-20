@@ -5,7 +5,8 @@ import { Button, Searchbar } from 'react-native-paper';
 import { useState } from 'react';
 import stationData from '@/assets/data/stations.json';
 import { useDispatch } from 'react-redux';
-import { setActiveStationId } from '@/state/departure-reducer';
+import { setActiveStation } from '@/state/departure-reducer';
+import { StationModel } from '@/models/stations';
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export default function Index() {
           style={{ marginBottom: 5 }}
           key={station.id}
           mode="outlined"
-          onPress={() => onClickOfStation(station.stationId)}
+          onPress={() => onClickOfStation(station as StationModel)}
         >
           {station.stationName}
         </Button>
@@ -47,8 +48,8 @@ export default function Index() {
     </View>
   );
 
-  function onClickOfStation(id: string): void {
-    dispatch(setActiveStationId(id));
+  function onClickOfStation(station: StationModel): void {
+    dispatch(setActiveStation(station));
 
     return router.push(`../departure-board/`);
   }

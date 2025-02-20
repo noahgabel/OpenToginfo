@@ -8,10 +8,13 @@ import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setDepartures } from '@/state/departure-reducer';
 import { useAppSelector } from '@/state/hooks';
+import { StationModel } from '@/models/stations';
 
 export default function DepartureBoard() {
   const dispatch = useDispatch();
-  const activeStationId = useAppSelector((state) => state.auth.activeStationId);
+  const activeStation = useAppSelector(
+    (state) => state.departure.activeStation,
+  );
 
   useEffect(() => {
     const initializeFavoritesFile = async () => {
@@ -30,42 +33,53 @@ export default function DepartureBoard() {
     initializeFavoritesFile();
 
     const ws = new WebSocket(
-      `wss://api.mittog.dk/api/ws/departure/${activeStationId}/dinstation/`,
+      `wss://api.mittog.dk/api/ws/departure/${activeStation?.stationId}/dinstation/`,
     );
 
     const handleShake = async () => {
       const fileUri = `${FileSystem.documentDirectory}favoritez.json`;
-      let favorites = [];
+      let favorites: StationModel[] = [];
 
       try {
         const fileInfo = await FileSystem.getInfoAsync(fileUri);
         if (fileInfo.exists) {
           const fileContent = await FileSystem.readAsStringAsync(fileUri);
-          favorites = JSON.parse(fileContent);
+          favorites = JSON.parse(fileContent) as StationModel[];
         }
       } catch (error) {
         console.error('Error reading favorites file:', error);
       }
 
-      if (favorites.includes(activeStationId)) {
-        favorites = favorites.filter((id: string) => id !== activeStationId);
-        Alert.alert(
-          'Favorite removed',
-          `Station ${activeStationId} removed from favorites.`,
-        );
-      } else {
-        favorites.push(activeStationId);
-        Alert.alert(
-          'Favorite added',
-          `Station ${activeStationId} added to favorites.`,
-        );
-      }
+      if (activeStation) {
+        if (
+          favorites.some(
+            (station) => station.stationId === activeStation.stationId,
+          )
+        ) {
+          favorites = favorites.filter(
+            (station) => station.stationId !== activeStation.stationId,
+          );
+          Alert.alert(
+            'Favorite removed',
+            `Station ${activeStation.stationName} removed from favorites.`,
+          );
+        } else {
+          favorites.push(activeStation);
+          Alert.alert(
+            'Favorite added',
+            `Station ${activeStation.stationName} added to favorites.`,
+          );
+        }
 
-      try {
-        await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(favorites));
-        console.log('Favorites written to file:', favorites);
-      } catch (error) {
-        console.error('Error writing to favorites file:', error);
+        try {
+          await FileSystem.writeAsStringAsync(
+            fileUri,
+            JSON.stringify(favorites),
+          );
+          console.log('Favorites written to file:', favorites);
+        } catch (error) {
+          console.error('Error writing to favorites file:', error);
+        }
       }
     };
 
@@ -98,7 +112,7 @@ export default function DepartureBoard() {
       subscription && subscription.remove();
       ws.close();
     };
-  }, [dispatch, activeStationId]);
+  }, [dispatch, activeStation?.stationId]);
 
   return <DeparturesViewComponent />;
 }

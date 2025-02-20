@@ -38,6 +38,7 @@ import {
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../state/store';
+import { useAppSelector } from '@/state/hooks';
 
 const fontConfig = {
   default: {

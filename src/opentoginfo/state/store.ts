@@ -3,7 +3,7 @@ import departureReducer from './departure-reducer';
 
 export const store = configureStore({
   reducer: {
-    auth: departureReducer,
+    departure: departureReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
