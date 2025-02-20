@@ -5,6 +5,11 @@ export const store = configureStore({
   reducer: {
     auth: departureReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: { warnAfter: 256 },
+      serializableCheck: { warnAfter: 256 },
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;
