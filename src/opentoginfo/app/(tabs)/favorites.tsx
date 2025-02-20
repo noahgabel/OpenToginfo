@@ -1,59 +1,42 @@
-import { View, StyleSheet, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native-paper';
-import stationData from '../../assets/data/stations.json';
+import { View, Text } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
-export default function Favorites() {
-  interface FavoriteItem {
-    id: number;
-    name: string;
-  }
-
-  const [data, setData] = useState<FavoriteItem[]>([]);
+const Favorites = () => {
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const loadData = async () => {
+    const fetchFavorites = async () => {
       try {
-        const formattedData = stationData.map((item) => ({
-          ...item,
-          id: Number(item.id),
-        }));
-        //setData(formattedData);
+        const fileUri = FileSystem.documentDirectory + 'favoritez.json';
+        const fileInfo = await FileSystem.getInfoAsync(fileUri);
+
+        if (fileInfo.exists) {
+          const fileContents = await FileSystem.readAsStringAsync(fileUri);
+          const favorites = JSON.parse(fileContents);
+          setFavorites(favorites);
+        } else {
+          console.log('File does not exist');
+          setFavorites([]);
+        }
       } catch (error) {
-        console.log('Error loading data:', error);
+        console.error('Error reading favorites from file:', error);
+        setFavorites([]);
       }
     };
 
-    loadData();
+    fetchFavorites();
   }, []);
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.text}>{item.name}</Text>
-          </View>
-        )}
-      />
+    <View>
+      {favorites.length > 0 ? (
+        favorites.map((favorite, index) => <Text key={index}>{favorite}</Text>)
+      ) : (
+        <Text>No favorites found</Text>
+      )}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50, // Add padding to the top
-    paddingHorizontal: 16,
-  },
-  itemContainer: {
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  text: {
-    fontSize: 18,
-  },
-});
+export default Favorites;
