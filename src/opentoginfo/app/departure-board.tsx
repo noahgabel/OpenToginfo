@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { Accelerometer } from 'expo-sensors';
 import { Alert } from 'react-native';
-
 import { useDispatch } from 'react-redux';
 import { setDepartures } from '@/state/departure-reducer';
 import { useAppSelector } from '@/state/hooks';
